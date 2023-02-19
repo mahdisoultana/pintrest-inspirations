@@ -69,10 +69,16 @@ function Card({ index }: { index: number }) {
   return (
     <motion.div
       animate={cardAnimation}
-      className={` w-[60%] hover:w-[110%] duration-300  ${marg(
+      className={` w-[60%] hover:w-[110%] duration-300 delay-200  ${marg(
         index,
-      )} h-[65vh] ease-out  bg-gray-300`}
-    ></motion.div>
+      )} h-[65vh]   relative`}
+    >
+      <img
+        src="https://images.unsplash.com/photo-1676735499618-7feb46c4d097?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+        className="w-full h-full object-cover relative"
+      />
+      <div className="absolute duration-300 top-0 left-0 w-full h-full  bg-gradient-to-b from-[#181818e2]  to-[#18181838] hover:from-[#18181800]  hover:to-[#18181800] z-10"></div>
+    </motion.div>
   );
 }
 export default Header;
