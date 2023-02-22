@@ -1,4 +1,4 @@
-import { data } from '../App';
+import { data } from '../../App';
 import Card from './Card';
 export const mainVar = (duration: number) => ({
   initial: { opacity: 0 },

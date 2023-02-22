@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { data, itemfound } from '../App';
-import { usePageId } from './context/RouteProvider';
+import { data, itemfound } from '../../App';
+import { usePageId } from '../context/RouteProvider';
 export const mainVar = (duration: number) => ({
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0, transition: { duration } },
