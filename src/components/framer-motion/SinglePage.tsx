@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MdOutlineArrowBack } from 'react-icons/md';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { data, itemfound } from '../App';
 import { usePageId } from './context/RouteProvider';
 export const mainVar = (duration: number) => ({
@@ -8,10 +9,12 @@ export const mainVar = (duration: number) => ({
   exit: { opacity: 0, y: -30 },
 });
 function SinglePage() {
-  const { setId, id } = usePageId();
+  const { id } = usePageId();
+  const { pathname } = useLocation();
   return (
     <motion.div
-      layoutId={id}
+      key={pathname}
+      variants={mainVar(2)}
       className="h-full w-[1100px] pr-4 fixed top-[18vh] left-[250px] z-[100]   "
     >
       <motion.div className="h-[74vh] w-full relative overflow-hidden shadow-sm shadow-black/40 p-12 rounded-md  ">
@@ -27,15 +30,16 @@ function SinglePage() {
           {data[itemfound(id)]?.title || "It's awesome to see everything here"}
         </motion.h1>
       </motion.div>
-      <BackButton setId={setId} />
+      <BackButton />
     </motion.div>
   );
 }
-function BackButton({ setId }: { setId: (id: string) => void }) {
+function BackButton() {
+  const navigate = useNavigate();
   return (
     <p
       className=" pt-2 pb-5  italic flex items-center space-x-2  font-medium cursor-pointer"
-      onClick={() => setId('sdsd')}
+      onClick={() => navigate('/')}
     >
       <MdOutlineArrowBack /> <span>back</span>
     </p>

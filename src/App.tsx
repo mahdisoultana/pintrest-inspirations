@@ -1,9 +1,6 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import Card from './components/Card';
-import Header from './components/Header';
-import Line from './components/Line';
-import SinglePage from './components/SinglePage';
-import { usePageId } from './components/context/RouteProvider';
+import { ReactNode } from 'react';
+import Header from './components/gsap/Header';
+import Line from './components/gsap/Line';
 export const data: { title: string; img: string }[] = [
   {
     title: 'Interstellar',
@@ -35,38 +32,27 @@ export const data: { title: string; img: string }[] = [
   },
 ];
 
-export const mainVar = (duration: number) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration } },
-  exit: { opacity: 0 },
-});
-export const itemfound = (id: string): number =>
-  data.findIndex((it) => it.title == id);
-function App() {
-  const { id } = usePageId();
-
+function App({ children }: { children: ReactNode }) {
   return (
-    <AnimatePresence key={id}>
-      <motion.div className="font-Nunito text-white font-light bg-[#181818]">
+    <>
+      <div className="font-Nunito text-white font-light bg-[#181818]">
         <Line className="left-1/2" />
         <Line className="right-1/3" />
         <Line className="right-[150px]" />
         <Line className="left-[260px]" />
 
         <Header>
-          <motion.main className=" w-full  h-full  flex space-x-4 px-1 items-center ">
-            {data.map((item, key) => (
-              <motion.div layoutId={item.title}>
-                <Card key={key} img={item.img} title={item.title} index={key} />
-              </motion.div>
-            ))}
-
-            {data[itemfound(id)] && <SinglePage />}
-          </motion.main>
+          <main className=" w-full  h-full  flex space-x-4 px-1 items-center ">
+            {children}
+          </main>
         </Header>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+    </>
   );
 }
 
 export default App;
+
+// ------------
+export const itemfound = (id: string): number =>
+  data.findIndex((it) => it.title == id);
