@@ -1,12 +1,14 @@
-import { Route, Routes } from 'react-router-dom';
+import { usePageId } from '../context/RouteProvider';
 import Home from './Home';
 import SinglePage from './SinglePage';
 const RoutesApp = () => {
+  const { id } = usePageId();
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/movie/:id" element={<SinglePage />} />
-    </Routes>
+    <>
+      <Home />
+      <SinglePage />
+    </>
   );
 };
 export default RoutesApp;

@@ -1,8 +1,12 @@
+import { useRef } from 'react';
+
 function Nav() {
+  const render = useRef(true);
+
   return (
-    <div className="h-[60px] w-full flex justify-between items-center px-6">
+    <div className=" h-[60px] w-full flex justify-between items-center px-6">
       <span className="w-4 h-4 "></span>
-      <span className="w-36 h-full flex items-center  ">
+      <span className="w-36 h-full flex items-center  logo">
         <svg
           id="Layer_1"
           data-name="Layer 1"
@@ -48,7 +52,7 @@ function Nav() {
           </g>
         </svg>
       </span>
-      <div className=" flex items-center space-x-3">
+      <div className=" flex items-center space-x-3 avatar">
         <div className="w-[45px] rounded-full  h-[45px] overflow-hidden border p-[1.8px]">
           <img
             src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"

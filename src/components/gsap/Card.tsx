@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { usePageId } from '../context/RouteProvider';
+import { goToEl } from '../context/TimeLine';
 
 function Card({
   index,
@@ -10,21 +11,29 @@ function Card({
   title: string;
   index: number;
 }) {
-  const navigate = useNavigate();
+  const { setId, id } = usePageId();
 
   return (
     <motion.div
-      onClick={() => navigate(`/movie/${title}`)}
-      className={`shadow shadow-black/50 cursor-pointer  w-full  ${marg(
-        index,
-      )} h-[65vh]   relative overflow-hidden`}
+      onClick={() => {
+        goToEl('.card-' + index, '.single-page');
+        setId(title);
+      }}
+      animate={{
+        opacity: id.length && id !== title ? [1, 0] : [0, 1],
+        y: id.length && id !== title ? [0, 50] : [30, 0],
+      }}
+      className={`   origin-bottom card flex-shrink-0 shadow shadow-black/50 cursor-pointer  w-[120px] hover:w-[250px] duration-500 ${
+        'card-' + index
+      }  ${marg(index)} h-[65vh]   relative overflow-hidden`}
     >
       <motion.img
         src={img}
-        className="w-full h-full object-cover bg-right relative  block"
+        className={`w-full h-full object-cover bg-right relative  block `}
       />
       <motion.div
-        className={`absolute  top-0 left-0 w-full h-full  bg-[#0d0d0dbd]  z-10 flex items-center pointer-events-none  `}
+        className={`absolute
+         top-0 left-0 w-full h-full  bg-[#0d0d0dbd] hover:bg-[#0d0d0d00] z-10 flex items-center duration-300  `}
       >
         <p className="   font-medium tracking-wide pl-5 pr-2">{title}</p>
       </motion.div>

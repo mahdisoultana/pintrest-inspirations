@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useAnimeScenes } from './components/context/TimeLine';
 import Header from './components/gsap/Header';
 import Line from './components/gsap/Line';
 export const data: { title: string; img: string }[] = [
@@ -33,6 +34,7 @@ export const data: { title: string; img: string }[] = [
 ];
 
 function App({ children }: { children: ReactNode }) {
+  useAnimeScenes();
   return (
     <>
       <div className="font-Nunito text-white font-light bg-[#181818]">
@@ -42,7 +44,7 @@ function App({ children }: { children: ReactNode }) {
         <Line className="left-[260px]" />
 
         <Header>
-          <main className=" w-full  h-full  flex space-x-4 px-1 items-center ">
+          <main className=" w-full  h-full justify-between  flex space-x-4 px-1 items-center ">
             {children}
           </main>
         </Header>
