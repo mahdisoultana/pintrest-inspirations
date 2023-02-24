@@ -1,0 +1,13 @@
+.netflix ::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+.netflix ::-webkit-scrollbar-button {
+  background: transparent;
+}
+.netflix ::-webkit-scrollbar-track-piece {
+  background: rgb(19, 19, 19);
+}
+.netflix ::-webkit-scrollbar-thumb {
+  background: rgb(15, 95, 207);
+}
