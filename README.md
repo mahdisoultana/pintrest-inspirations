@@ -1,11 +1,11 @@
 ## pintrest-inspirations
 
-#### portolio demos with React , typescirpt, gsap, and framer-motion ,from pintrest shows interactive sites 
+#### portolio demos  shows interactive example Apps with React , typescirpt, gsap, and framer-motion ,from pintrest and dribble sites inspiration.
 
-hope you get some values from my code !
+hope you get some value from my code !
 
-please give a credit , i need your support  buddy 👩‍🚀. 
+please give a credit , i need your support  buddy !👩‍🚀. 
 
-enjoy ✨💫
+have a nice day , enjoy ✨💫 
 
 Mahdi Soultana .
