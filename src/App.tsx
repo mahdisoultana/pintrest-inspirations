@@ -1,5 +1,5 @@
 import { motion, useCycle } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import {
   FaDribbble,
@@ -8,32 +8,49 @@ import {
   FaLinkedinIn,
 } from 'react-icons/fa';
 import { VscLiveShare } from 'react-icons/vsc';
-import Netflixvideo from './netflix/assets/Netflix demo animation.mp4';
-import netflixSrc from './netflix/assets/netflix-img.jpg';
+import { HomeCardsData } from './context/data';
+import { HomeCardType } from './context/types';
 function App() {
   const [selected, setSelected] = useState(0);
   return (
     <main className="bg-[#fafafa] min-h-screen">
       <div className="font-Nunito text-white font-light   grid grid-cols-3 gap-y-12 gap-5 m-auto w-[1200px] py-12">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <Card key={i} />
+        {HomeCardsData.map((data, i) => (
+          <Card key={i} data={data} />
         ))}
       </div>
     </main>
   );
 }
 export default App;
-function Card() {
+function Card({ data }: { data: HomeCardType }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [sel, setSel] = useState(true);
+  useEffect(() => {
+    if (videoRef.current) {
+      if (sel) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+    }
+  }, [sel]);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.addEventListener('pause', (e) => {
+        setSel(true);
+      });
+      videoRef.current.addEventListener('play', (e) => {
+        setSel(false);
+      });
+    }
+  }, []);
   return (
     <motion.div className="  rounded-lg shadow-md overflow-hidden shadow-black/60  w-full relative h-[270px]">
-      {sel && <OverlayCard setSel={setSel} />}
-      <video
-        onClick={() => setSel(true)}
-        className="w-full h-full relative z-[1] "
-        controls
-      >
-        <source src={Netflixvideo} />
+      {sel && <OverlayCard setSel={setSel} overLayData={data} />}
+
+      <video ref={videoRef} className="w-full h-full relative z-[1] " controls>
+        <source src={data.video} />
       </video>
     </motion.div>
   );
@@ -56,7 +73,7 @@ function PlayButton(props: PropsType) {
             <Bubble key={index} bg={item.bg} index={index} />
           ))}
         </motion.div>
-        <AiFillPlayCircle className="  rounded-full w-full h-full text-6xl relative text-gray-100 group-hover:text-blue-500 duration-1000" />
+        <AiFillPlayCircle className="  rounded-full w-full h-full text-6xl relative text-gray-100 group-hover:text-green-700 duration-600" />
       </motion.div>
     </button>
   );
@@ -89,7 +106,14 @@ function Bubble({ bg, index }: { index: number; bg: string }) {
     />
   );
 }
-function OverlayCard({ setSel }: { setSel: (pram: boolean) => void }) {
+
+function OverlayCard({
+  setSel,
+  overLayData,
+}: {
+  setSel: (pram: boolean) => void;
+  overLayData: Omit<HomeCardType, 'video'>;
+}) {
   const variantsC = {
     animate: { opacity: 1, transition: { delay: 2, staggerChildren: 0.5 } },
     initial: { opacity: 0 },
@@ -110,6 +134,7 @@ function OverlayCard({ setSel }: { setSel: (pram: boolean) => void }) {
     y: [0, -5, 0],
     transition: { duration: 0.5, delay: 0.3 },
   };
+
   return (
     <div
       className="group"
@@ -117,7 +142,7 @@ function OverlayCard({ setSel }: { setSel: (pram: boolean) => void }) {
       onMouseLeave={() => setState()}
     >
       <img
-        src={netflixSrc}
+        src={overLayData.img}
         alt="netflix-img "
         className={`absolute top-0 object-cover left-0 w-full h-full z-10`}
       />
@@ -140,37 +165,50 @@ function OverlayCard({ setSel }: { setSel: (pram: boolean) => void }) {
           animate={animate()}
           title="Dribbble"
         >
-          <FaDribbble className=" cursor-pointer  text-2xl z-10 text-pink-400 hover:text-pink-600" />
+          <a target="no_blank" href={overLayData.dribble}>
+            <FaDribbble className=" cursor-pointer  text-2xl z-10 text-pink-400 hover:text-pink-600" />
+          </a>
         </motion.div>
         <motion.div
           whileHover={hoverEffect}
           animate={animate(-1)}
           title="LinkedinIn"
         >
-          <FaLinkedinIn className=" cursor-pointer    text-2xl z-10 hover:text-blue-400  text-blue-500" />
+          <a target="no_blank" href={overLayData.linkedIn}>
+            <FaLinkedinIn className=" cursor-pointer    text-2xl z-10 hover:text-blue-400  text-blue-500" />
+          </a>
         </motion.div>
         <motion.div
           whileHover={hoverEffect}
           animate={animate()}
           title="Instagram"
         >
-          <FaInstagram className=" cursor-pointer    text-2xl z-10 text-indigo-500 hover:text-red-400" />
+          <a target="no_blank" href={overLayData.instagram}>
+            <FaInstagram className=" cursor-pointer    text-2xl z-10 text-indigo-500 hover:text-red-400" />
+          </a>
         </motion.div>
         <motion.div
           whileHover={hoverEffect}
           animate={animate(-1)}
           title="Github"
         >
-          <FaGithub className=" cursor-pointer    text-2xl z-10 text-gray-600 hover:text-gray-100" />
+          <a target="no_blank" href={overLayData.github}>
+            <FaGithub className=" cursor-pointer    text-2xl z-10 text-gray-600 hover:text-gray-100" />
+          </a>
         </motion.div>
         <motion.div
+          onClick={() => {
+            window.open(overLayData.live);
+          }}
           style={{ originY: '50%' }}
           whileHover={hoverEffect}
           animate={animate(-1)}
           title="See The demo live ✨"
           className=" mt-12 w-10 h-10 p-2 flex items-center justify-center"
         >
+          {/* <Link to={overLayData.live}> */}
           <VscLiveShare className=" cursor-pointer   block text-2xl z-10  text-blue-300 hover:text-blue-800" />
+          {/* </Link> */}
         </motion.div>
       </motion.div>
     </div>
