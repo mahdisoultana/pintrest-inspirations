@@ -5,7 +5,7 @@ function Layout({ children }: { children: ReactNode }) {
   return (
     <div
       className="font-Poppins grid bg-gray-900 min-h-screen"
-      style={{ gridTemplateColumns: '60px 1fr 60px' }}
+      style={{ gridTemplateColumns: '50px 1fr 50px' }}
     >
       <Nav />
       <main className="bg-gray-100">{children}</main>

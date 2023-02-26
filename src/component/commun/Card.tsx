@@ -35,9 +35,8 @@ function Card({ data }: { data: HomeCardType }) {
   return (
     <motion.div
       whileHover={{
-        y: -5,
-        scale: 1.04,
-        transition: { stiffness: 300, type: 'spring' },
+        y: -4,
+        scale: 1.03,
       }}
       className="  rounded-lg shadow-md overflow-hidden shadow-black/60  w-full relative h-[270px]"
     >
