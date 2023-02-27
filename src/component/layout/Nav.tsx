@@ -1,7 +1,7 @@
 import { AiOutlineQuestionCircle } from 'react-icons/ai';
-import { CiHeart } from 'react-icons/ci';
 import { MdOutlineMail } from 'react-icons/md';
 import { SiUpwork } from 'react-icons/si';
+import LikeButton from '../commun/LikeButton';
 
 function Nav() {
   return (
@@ -11,17 +11,7 @@ function Nav() {
         className=" w-[40px] cursor-pointer hover:border-gray-100 border-2 border-transparent  h-[40px] rounded-full block"
         src="/mahdi.jpg "
       />
-      <div
-        className="flex items-center justify-center flex-col"
-        title="let me know you liked projects ❤"
-      >
-        <button
-          className={`"w-[40px] h-[40px] flex items-center justify-center hover:text-red-500 `}
-        >
-          <CiHeart />
-        </button>
-        <p className="text-xs -mt-1 pointer-events-none">324</p>
-      </div>
+      <LikeButton />
       {[
         {
           icon: SiUpwork,
