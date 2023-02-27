@@ -38,6 +38,7 @@ function Card({ data }: { data: HomeCardType }) {
         },
       }}
       className="  rounded-lg shadow-md overflow-hidden shadow-black/60  w-full relative h-[240px]"
+      title={data.title}
     >
       {selected === data.id ? (
         ''
