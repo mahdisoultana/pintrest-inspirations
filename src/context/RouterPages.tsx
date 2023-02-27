@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import App from '../App';
-import Netflix from '../netflix';
+import Netflix from '../projects/netflix';
 
 function RouterPages() {
   return (

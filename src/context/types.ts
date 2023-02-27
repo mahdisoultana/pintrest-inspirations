@@ -8,4 +8,5 @@ export type HomeCardType = {
   instagram: string;
   live: string;
   title: string;
+  selected: boolean;
 };

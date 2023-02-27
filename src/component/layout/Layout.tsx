@@ -3,12 +3,11 @@ import Footer from './Footer';
 import Nav from './Nav';
 function Layout({ children }: { children: ReactNode }) {
   return (
-    <div
-      className="font-Poppins grid bg-gray-900 min-h-screen"
-      style={{ gridTemplateColumns: '50px 1fr 50px' }}
-    >
+    <div className="font-Poppins grid  min-h-screen bg-gray-100 ">
       <Nav />
-      <main className="bg-gray-100">{children}</main>
+      <main className="h-full w-full m-auto max-w-[1250px] pl-[40px] lg:pr-[30px] pr-[20px]">
+        {children}
+      </main>
       <Footer />
     </div>
   );

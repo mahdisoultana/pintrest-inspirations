@@ -5,6 +5,7 @@
 ::-webkit-scrollbar {
   width: 9px;
   height: 9px;
+  background: rgba(19, 19, 19, 0);
 }
 ::-webkit-scrollbar-button {
   width: 9px;
@@ -15,7 +16,10 @@
   background: rgba(19, 19, 19, 0);
 }
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-gradient-to-t from-blue-500 to-indigo-400;
+  @apply rounded-full bg-gradient-to-t to-blue-400 from-gray-800 cursor-pointer active:cursor-grabbing;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply rounded-full bg-gradient-to-t to-blue-500 from-gray-900;
 }
 .abs-center {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;

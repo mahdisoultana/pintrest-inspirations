@@ -1,5 +1,5 @@
 import { motion, useCycle, useMotionValue, useTransform } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import {
   FaDribbble,
@@ -9,38 +9,41 @@ import {
 } from 'react-icons/fa';
 import { VscLiveShare } from 'react-icons/vsc';
 import { HomeCardType } from '../../context/types';
+import { useSelected } from '../Home';
 
 function Card({ data }: { data: HomeCardType }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [sel, setSel] = useState(true);
+  const { selected, setSelected } = useSelected();
+
   useEffect(() => {
-    if (videoRef.current) {
-      if (sel) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
+    const time = setTimeout(() => {
+      if (videoRef.current) {
+        if (selected === data.id) {
+          videoRef.current.play();
+        } else {
+          videoRef.current.pause();
+        }
       }
-    }
-  }, [sel]);
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.addEventListener('pause', (e) => {
-        setSel(true);
-      });
-      videoRef.current.addEventListener('play', (e) => {
-        setSel(false);
-      });
-    }
-  }, []);
+    }, 200);
+    return () => clearTimeout(time);
+  }, [selected]);
+
   return (
     <motion.div
       whileHover={{
         y: -4,
         scale: 1.03,
+        transition: {
+          duration: 0.3,
+        },
       }}
-      className="  rounded-lg shadow-md overflow-hidden shadow-black/60  w-full relative h-[270px]"
+      className="  rounded-lg shadow-md overflow-hidden shadow-black/60  w-full relative h-[240px]"
     >
-      {sel && <OverlayCard setSel={setSel} overLayData={data} />}
+      {selected === data.id ? (
+        ''
+      ) : (
+        <OverlayCard setSelected={setSelected} overLayData={data} />
+      )}
 
       <video ref={videoRef} className="w-full h-full relative z-[1] " controls>
         <source src={data.video} />
@@ -69,7 +72,12 @@ function PlayButton(props: PropsType) {
         whileTap={{ scale: 1 }}
         animate={{
           y: props.status === 'hover' ? [0, -10] : [0, 0],
-          transition: { duration: 1, repeat: Infinity, repeatType: 'mirror' },
+          transition: {
+            duration: 1,
+            repeat: Infinity,
+            repeatType: 'mirror',
+            stiffness: 130,
+          },
         }}
       >
         <motion.div className="absolute w-full h-full top-0 left-0 group-hover:block hidden opacity-0  duration-700 ">
@@ -116,10 +124,10 @@ function Bubble({ bg, index }: { index: number; bg: string }) {
 }
 // -----------------------
 function OverlayCard({
-  setSel,
+  setSelected,
   overLayData,
 }: {
-  setSel: (pram: boolean) => void;
+  setSelected: (pram: string | null) => void;
   overLayData: Omit<HomeCardType, 'video'>;
 }) {
   const variantsC = {
@@ -134,12 +142,12 @@ function OverlayCard({
   const animate = (dir = 1, anime?: any) => ({
     opacity: status == 'hover' ? 1 : 0,
     x: status == 'hover' ? '0%' : dir > 0 ? '-200%' : '200%',
-    transition: { delay: status == 'hover' ? 0.4 : 0 },
+    transition: { delay: status == 'hover' ? 0.5 : 0 },
     ...anime,
   });
   const hoverEffect = {
     rotate: 375,
-    y: [0, -5, 0],
+    y: [0, -3, 0],
     transition: { duration: 0.5, delay: 0.3 },
   };
 
@@ -166,13 +174,18 @@ function OverlayCard({
         } z-10`}
       />
 
-      <PlayButton onClick={() => setSel(false)} status={status} />
+      <PlayButton
+        onClick={() => {
+          setSelected(overLayData.id);
+        }}
+        status={status}
+      />
 
       <motion.div
         initial="initial"
         animate="animate"
         variants={variantsC}
-        className="absolute right-4 top-2 flex flex-col items-center justify-center space-y-4 z-[11]"
+        className="absolute right-3 top-4 flex flex-col items-center justify-center space-y-2 z-[11]"
       >
         <motion.div
           whileHover={hoverEffect}
@@ -210,20 +223,22 @@ function OverlayCard({
             <FaGithub className=" cursor-pointer    text-2xl z-10 text-gray-600 hover:text-gray-100" />
           </a>
         </motion.div>
-        <motion.div
-          onClick={() => {
-            window.open(overLayData.live);
-          }}
-          style={{ originY: '50%' }}
-          whileHover={hoverEffect}
-          animate={animate(-1)}
-          title="See The demo live ✨"
-          className=" mt-12 w-10 h-10 p-2 flex items-center justify-center"
-        >
-          {/* <Link to={overLayData.live}> */}
-          <VscLiveShare className=" cursor-pointer   block text-2xl z-10  text-blue-300 hover:text-blue-800" />
-          {/* </Link> */}
-        </motion.div>
+        <div className="pt-9">
+          <motion.div
+            onClick={() => {
+              window.open(overLayData.live);
+            }}
+            style={{ originY: '50%' }}
+            whileHover={hoverEffect}
+            animate={animate(-1)}
+            title="See The demo live ✨"
+            className="  w-10 h-10 p-2 flex items-center justify-center"
+          >
+            {/* <Link to={overLayData.live}> */}
+            <VscLiveShare className=" cursor-pointer   block text-2xl z-10  text-blue-300 hover:text-blue-800" />
+            {/* </Link> */}
+          </motion.div>
+        </div>
       </motion.div>
     </div>
   );
