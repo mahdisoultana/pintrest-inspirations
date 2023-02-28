@@ -9,35 +9,36 @@ function Handle({
   className,
 }: {
   y: number;
-  className: string;
+  className?: string;
 
   active: boolean;
   setActive: Dispatch<SetStateAction<boolean>>;
 }) {
   const [hover, setHover] = useState(false);
   const ySpring = useSpring(0, { stiffness: 100, damping: 10, duration: 2 });
-  const xSpring = useSpring(0, { stiffness: 100, damping: 10, duration: 2 });
+  const xSpring = useSpring(0, { duration: 1 });
   const { x: positionX } = useX();
   useEffect(() => {
-    ySpring.set(y);
-    xSpring.set(positionX);
+    ySpring.set(y - 60);
+    xSpring.set(positionX - 20);
   }, [y]);
   return (
-    <motion.div
-      onMouseEnter={() => {
-        setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-      onClick={() => setActive((s) => !s)}
-      className={`w-1 h-screen bg-yellow-500  ${className}`}
-    >
+    <>
       <motion.span
+        onMouseEnter={() => {
+          setHover(true);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+        onClick={() => setActive((s) => !s)}
         className={`block w-12 h-12 rounded-full ${
           active ? 'bg-white' : 'bg-black'
-        } border-l-2 border-r-2  border-t-2  p-1 border-r-blue-600  border-l-red-400  border-b-blue-600  border-t-red-500  border-b-2  absolute left-1/2 z-10  `}
-        style={{ y: ySpring, x: '-50%' }}
+        } border-l-2 border-r-2  border-t-2  p-1 border-r-blue-600  border-l-red-400  border-b-blue-600  border-t-red-500  border-b-2  absolute   z-[100]  `}
+        style={{
+          y: ySpring,
+          x: positionX - 25,
+        }}
       >
         <motion.span
           style={{ y: '-50%' }}
@@ -103,7 +104,7 @@ function Handle({
           <MdArrowForwardIos />
         </motion.span>
       </motion.span>
-    </motion.div>
+    </>
   );
 }
 

@@ -6,7 +6,7 @@ function Freelancer({
   active,
   children,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   x: number;
   active: boolean;
 }) {
@@ -17,8 +17,8 @@ function Freelancer({
 
   return (
     <motion.article
-      className="font-Nunito bg-[#723942] h-screen absolute top-0 left-0 w-[50%] border-[#b42b40] border-2 overflow-hidden  flex items-center justify-center pointer-events-none"
-      style={active ? { width: xSpring } : { width: '50%' }}
+      className="font-Nunito bg-[#723942] h-screen absolute top-0 left-0  border-[#b42b40] border-2 overflow-hidden  flex items-center justify-center pointer-events-none"
+      style={active ? { width: xSpring } : { width: x }}
     >
       {children}
       <div className="w-full h-full absolute top-0 left-0 bg-[#890015]/50 mix-blend-soft-light z-10"></div>
