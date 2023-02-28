@@ -16,7 +16,7 @@ function LikeButton() {
       onClick={() => setCount((count) => (count == 342 ? count + 1 : 342))}
     >
       <button
-        className={`"w-[40px] h-[40px] flex items-center justify-center hover:text-red-500 `}
+        className={`flex items-center justify-center hover:text-red-500 `}
       >
         {count > 342 ? (
           <motion.div
@@ -49,7 +49,7 @@ function LikeButton() {
           animate="animate"
           initial="initial"
           exit="exit"
-          className=" absolute -bottom-1/3 text-xs -mt-1 cursor-pointer text-white  "
+          className=" absolute  top-2/3 text-xs  pt-2 cursor-pointer    "
         >
           {count}
         </motion.p>

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .line {
+    @apply top-0 right-0 h-full w-[.4px];
+  }
+}
+
 ::-webkit-scrollbar {
   width: 9px;
   height: 9px;

@@ -1,6 +1,4 @@
-import { motion, useCycle, useMotionValue, useTransform } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { AiFillPlayCircle } from 'react-icons/ai';
+import { motion, useCycle } from 'framer-motion';
 import {
   FaDribbble,
   FaGithub,
@@ -8,122 +6,9 @@ import {
   FaLinkedinIn,
 } from 'react-icons/fa';
 import { VscLiveShare } from 'react-icons/vsc';
-import { HomeCardType } from '../../context/types';
-import { useSelected } from '../Home';
+import { HomeCardType } from '../../../context/types';
+import PlayButton from './PlayButton';
 
-function Card({ data }: { data: HomeCardType }) {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const { selected, setSelected } = useSelected();
-
-  useEffect(() => {
-    const time = setTimeout(() => {
-      if (videoRef.current) {
-        if (selected === data.id) {
-          videoRef.current.play();
-        } else {
-          videoRef.current.pause();
-        }
-      }
-    }, 200);
-    return () => clearTimeout(time);
-  }, [selected]);
-
-  return (
-    <motion.div
-      whileHover={{
-        y: -4,
-        scale: 1.03,
-        transition: {
-          duration: 0.3,
-        },
-      }}
-      className="  rounded-lg shadow-md overflow-hidden shadow-black/60  w-full relative h-[240px]"
-      title={data.title}
-    >
-      {selected === data.id ? (
-        ''
-      ) : (
-        <OverlayCard setSelected={setSelected} overLayData={data} />
-      )}
-
-      <video ref={videoRef} className="w-full h-full relative z-[1] " controls>
-        <source src={data.video} />
-      </video>
-    </motion.div>
-  );
-}
-export default Card;
-// -----------------------
-type PropsType = {
-  status: 'hover' | 'notHover';
-} & React.ComponentPropsWithoutRef<'button'>;
-function PlayButton(props: PropsType) {
-  const y = useMotionValue(0);
-
-  const color = useTransform(y, [0, -10], ['#EEE', '#ed4e40']);
-  return (
-    <button
-      title={'play video Preview ✅'}
-      {...props}
-      className="abs-center w-[50px] h-[50px] shadow hover:shadow-md duration-1000 shadow-black   rounded-full  z-10 flex items-center justify-center  hover:scale-[1.2]"
-    >
-      <motion.div
-        style={{ color, y }}
-        whileHover={{ scale: 1.5 }}
-        whileTap={{ scale: 1 }}
-        animate={{
-          y: props.status === 'hover' ? [0, -10] : [0, 0],
-          transition: {
-            duration: 1,
-            repeat: Infinity,
-            repeatType: 'mirror',
-            stiffness: 130,
-          },
-        }}
-      >
-        <motion.div className="absolute w-full h-full top-0 left-0 group-hover:block hidden opacity-0  duration-700 ">
-          {[
-            { bg: 'bg-red-300/50' },
-            { bg: 'bg-orange-500/30' },
-            { bg: 'bg-blue-600/70' },
-          ].map((item, index) => (
-            <Bubble key={index} bg={item.bg} index={index} />
-          ))}
-        </motion.div>
-        <AiFillPlayCircle className="  rounded-full w-full h-full text-6xl relative  duration-600" />
-      </motion.div>
-    </button>
-  );
-}
-// -----------------------
-function Bubble({ bg, index }: { index: number; bg: string }) {
-  const variantsItem = {
-    initial: {},
-    animate: (i: number) => {
-      const num = i + Math.random() * 1;
-
-      return {
-        opacity: [0, 1, 0],
-        scale: [0, 1.4, 2],
-        transition: {
-          repeat: Infinity,
-          duration: 6,
-          delay: num + -1,
-        },
-      };
-    },
-  };
-  return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={variantsItem}
-      custom={index}
-      className={`w-[100%] h-[100%]  rounded-full absolute ${bg} `}
-    />
-  );
-}
-// -----------------------
 function OverlayCard({
   setSelected,
   overLayData,
@@ -154,7 +39,7 @@ function OverlayCard({
 
   return (
     <div
-      className="group"
+      className="group rounded-lg"
       onMouseEnter={() => setState()}
       onMouseLeave={() => setState()}
     >
@@ -165,7 +50,7 @@ function OverlayCard({
         }}
         src={overLayData.img}
         alt="netflix-img "
-        className={`absolute top-0 object-cover left-0 w-full h-full z-10`}
+        className={`rounded-lg absolute top-0 object-cover left-0 w-full h-full z-10`}
       />
       <div
         className={` absolute top-0 object-cover left-0 w-full h-full bg-gradient-to-l duration-1000 pointer-events-none ${
@@ -244,3 +129,5 @@ function OverlayCard({
     </div>
   );
 }
+
+export default OverlayCard;
