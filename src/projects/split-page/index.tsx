@@ -4,14 +4,19 @@ import Freelancer from './Freelancer';
 import Handle from './Handle';
 import Nav from './Nav';
 import Officer from './Officer';
+import Particle from './Particle';
 
 export const useX = create<{ x: number; setX: (x: number) => void }>((set) => ({
   x: window.innerWidth / 2,
-  setX: (x: number) => set({ x: x }),
+  setX: (x: number) => set({ x }),
+}));
+export const useY = create<{ y: number; setY: (y: number) => void }>((set) => ({
+  y: window.innerHeight / 2,
+  setY: (y: number) => set({ y }),
 }));
 function SplitPage() {
   const { x, setX } = useX();
-  const [y, setY] = useState(() => window.innerHeight / 2);
+  const { y, setY } = useY();
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -33,6 +38,7 @@ function SplitPage() {
       <Officer />
       <Freelancer x={x} active={active} />
       <Handle active={active} y={y} setActive={setActive} />
+      <Particle active={active} />
     </section>
   );
 }
