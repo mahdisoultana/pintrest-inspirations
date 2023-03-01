@@ -1,6 +1,6 @@
 function Nav() {
   return (
-    <nav className="relative z-10 font-Nunito">
+    <nav className="nav relative z-10 font-Nunito ">
       <div className="text-white m-auto w-1000 py-2 flex items-center justify-between  px-6">
         <div
           className="w-11 h-11 rounded-full bg-black flex items-center justify-center text-xl font-extralight cursor-pointer hover:opacity-40 border-2 border-[#1196d3] p-2"

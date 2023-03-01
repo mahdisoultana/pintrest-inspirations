@@ -1,27 +1,26 @@
 import { motion, useSpring } from 'framer-motion';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
-import { useX } from '.';
+import { useX, useY } from './hooks';
 function Handle({
-  y,
   setActive,
   active,
   className,
 }: {
-  y: number;
   className?: string;
 
   active: boolean;
   setActive: Dispatch<SetStateAction<boolean>>;
 }) {
   const [hover, setHover] = useState(false);
-  const ySpring = useSpring(0, { stiffness: 100, damping: 10, duration: 2 });
-  const xSpring = useSpring(0, { duration: 1 });
+  const { y } = useY();
+  const ySpring = useSpring(y, { stiffness: 100, damping: 10, duration: 2 });
   const { x: positionX } = useX();
+  const xSpring = useSpring(positionX, { duration: 1 });
   useEffect(() => {
-    ySpring.set(y - 60);
+    ySpring.set(active ? y - 60 : y);
     xSpring.set(positionX - 20);
-  }, [y]);
+  }, [y, positionX]);
   return (
     <>
       <motion.span
@@ -32,7 +31,7 @@ function Handle({
           setHover(false);
         }}
         onClick={() => setActive((s) => !s)}
-        className={`block w-12 h-12 rounded-full ${
+        className={` handle block w-12 h-12 rounded-full ${
           active ? 'bg-white' : 'bg-black'
         } border-l-2 border-r-2  border-t-2  p-1 border-r-blue-600  border-l-red-400  border-b-blue-600  border-t-red-500  border-b-2  absolute   z-[100]  `}
         style={{

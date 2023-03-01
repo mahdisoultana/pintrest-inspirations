@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { IconType } from 'react-icons';
 import { BsCircle } from 'react-icons/bs';
 import { TbTriangleInverted } from 'react-icons/tb';
-import { useX, useY } from '.';
+import { useX, useY } from './hooks';
 function Particle({ active }: { active: boolean }) {
   return (
-    <div className="absolute top-0 left-0 bg-red-500/0 z-[110] w-full h-screen pointer-events-none ">
+    <div className="absolute top-0 left-0 bg-red-500/0 z-[110] w-full h-screen pointer-events-none opacity-1 particle-container">
       {[1, 2, 3, 4].map((i) => (
         <div key={i}>
           <Icon
@@ -100,20 +100,23 @@ function Particle({ active }: { active: boolean }) {
     </div>
   );
 }
-function Icon({
+type ElementType = () => JSX.Element;
+export function Icon({
   active,
   delay,
   IconItem,
   className = '',
   offset = [0.05, 0.4],
   reverseRotate = false,
+  isRotate = true,
 }: {
   delay: number;
   active: boolean;
+  isRotate?: boolean;
   reverseRotate?: boolean;
   offset: [number, number];
   className: string;
-  IconItem: IconType;
+  IconItem: IconType | ElementType;
 }) {
   const { x } = useX();
   const { y } = useY();
@@ -136,7 +139,7 @@ function Icon({
         x: xSpring,
         y: ySpring,
 
-        rotate: reverseRotate ? xSpring : xSpring,
+        rotate: !isRotate ? 0 : reverseRotate ? xSpring : xSpring,
       }}
       animate={
         active
