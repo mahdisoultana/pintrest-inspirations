@@ -38,6 +38,7 @@ function Layout({ children }: { children: ReactNode }) {
       .to(['.line-main-vertical', '.line-main', '.line-nav'], {
         opacity: 0,
       });
+    // .fromTo('.footer', { x: '100%', opacity: 0 }, { x: '0%', opacity: 1 });
   });
   return (
     <div className="font-Poppins grid  min-h-screen bg-gray-100 ">

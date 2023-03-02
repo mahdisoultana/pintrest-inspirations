@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { HomeCardsData } from '../context/data';
 import Line from './commun/Line';
 import Card from './commun/card/Card';
@@ -11,6 +12,9 @@ export const useSelected = create<{
   setSelected: (id: string | null) => set({ selected: id }),
 }));
 function Home() {
+  const { selected, setSelected } = useSelected();
+  const memoSetSelected = useCallback(setSelected, []);
+
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 lg:gap-y-12 gap-y-8 gap-4  py-12 px-4 relative min-h-screen">
       <Line className="top-12 h-[.6px] w-full line-main" />
@@ -29,7 +33,12 @@ function Home() {
       />
 
       {HomeCardsData.map((data, i) => (
-        <Card key={i} data={data} />
+        <Card
+          key={i}
+          data={data}
+          selected={selected == data.id}
+          setSelected={memoSetSelected}
+        />
       ))}
     </div>
   );
