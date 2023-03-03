@@ -63,6 +63,7 @@ const Card = memo(
         )}
 
         <video
+          preload="none"
           ref={videoRef}
           className="w-full h-full relative z-[1] rounded-lg"
           controls
