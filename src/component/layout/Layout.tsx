@@ -6,11 +6,12 @@ import Nav from './Nav';
 function Layout({ children }: { children: ReactNode }) {
   useGsap((gsap) => {
     const tl = gsap.timeline({ duration: 1 });
-    tl.fromTo(
-      '.line-nav',
-      { height: '0%', opacity: 0 },
-      { height: '100%', opacity: 1 },
-    )
+    tl.to('.container', { opacity: 1 })
+      .fromTo(
+        '.line-nav',
+        { height: '0%', opacity: 0 },
+        { height: '100%', opacity: 1 },
+      )
 
       .fromTo(
         '.line-main',
@@ -42,12 +43,13 @@ function Layout({ children }: { children: ReactNode }) {
   });
   return (
     <div className="font-Poppins grid  min-h-screen bg-gray-100 ">
-      <Nav />
-
-      <main className="h-full w-full m-auto max-w-[1250px] pl-[40px] lg:pr-[30px] pr-[20px] relative  ">
-        {children}
-      </main>
-      <Footer />
+      <div className="container  opacity-0">
+        <Nav />
+        <main className="h-full w-full m-auto max-w-[1250px] pl-[40px] lg:pr-[30px] pr-[20px] relative  ">
+          {children}
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

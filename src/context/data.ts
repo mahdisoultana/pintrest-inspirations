@@ -36,8 +36,9 @@ export const HomeCardsData: HomeCardType[] = [
       'https://dribbble.com/shots/20813856-Freelancer-Vs-Office-hero-by-framer-motion-gsap-React-TS',
 
     linkedIn:
-      'https://www.linkedin.com/feed/update/urn:li:activity:7034825580525047808/',
-    instagram: 'https://www.instagram.com/p/CpCrLZsD2-3/',
+      'https://www.linkedin.com/feed/update/urn:li:activity:7037385996702773248/',
+    instagram:
+      'https://www.instagram.com/reel/CpVlPi-D4G8/?utm_source=ig_web_copy_link',
     live: '/split-page',
     title: ' Freelance vs office hero page Animation   ',
   },
