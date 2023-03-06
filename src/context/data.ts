@@ -42,4 +42,20 @@ export const HomeCardsData: HomeCardType[] = [
     live: '/split-page',
     title: ' Freelance vs office hero page Animation   ',
   },
+  {
+    id: v4(),
+    img: splitPageSrc,
+    video: splitPageVideo,
+    github:
+      'https://github.com/Mahdi-Soultana/pintrest-inspirations/tree/master/src/projects/split-page',
+    dribble:
+      'https://dribbble.com/shots/20813856-Freelancer-Vs-Office-hero-by-framer-motion-gsap-React-TS',
+
+    linkedIn:
+      'https://www.linkedin.com/feed/update/urn:li:activity:7037385996702773248/',
+    instagram:
+      'https://www.instagram.com/reel/CpVlPi-D4G8/?utm_source=ig_web_copy_link',
+    live: '/double-image-hover-effect',
+    title: 'Double Image Hover Effect with React',
+  },
 ];
