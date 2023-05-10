@@ -7,6 +7,7 @@ module.exports = {
         Nunito: 'Nunito, sans-serif',
         Poppins: 'Poppins, sans-serif',
         Lora: 'Lora, serif',
+        Bodoni: 'Bodoni Moda, serif',
       },
     },
   },
