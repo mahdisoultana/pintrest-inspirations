@@ -26,9 +26,8 @@ function BackArrow() {
       animate={{
         x: '0%',
         opacity: 1,
-        transition: { duration: 0.6, delay: selected ? 0.6 : 0 },
+        transition: { duration: 0.6, delay: selected ? 0.4 : 0 },
       }}
-      transition={{ duration: 0.6, delay: selected ? 0.6 : 0 }}
       title="back"
       className="z-[2] opacity-0 py-4 group flex cursor-pointer items-center text-white stroke-orange-300 hover:stroke-white w-[150px] h-2 fixed bottom-8 left-8"
     >
@@ -48,11 +47,12 @@ function HalfOverlay({ top }: { top: boolean }) {
       initial={{ scaleY: 0 }}
       exit={{
         scaleY: 0,
-        transition: { duration: DURATION, delay: DURATION },
+        transition: { duration: DURATION, delay: DURATION, ease: 'easeOut' },
       }}
       animate={{
-        scaleY: 1,
-        transition: { duration: DURATION },
+        scaleY: 1.1,
+
+        transition: { ease: 'easeInOut', duration: DURATION },
       }}
       className={`bg-black w-full h-ful ${top ? 'top-0' : 'bottom-0'}  `}
       style={{ transformOrigin: top ? '50% 0% ' : '50% 100% ', scaleY: 2 }}

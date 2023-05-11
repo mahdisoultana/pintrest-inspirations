@@ -23,7 +23,7 @@ function Effect7({ img }: { img: string }) {
       onMouseEnter={() => setIsEnter(true)}
       onMouseLeave={() => setIsEnter(false)}
       className={`relative h-[430px] w-[550px] ml-auto overflow-hidden cursor-pointer
-      }`}
+        `}
     >
       {/* bottom */}
       <img

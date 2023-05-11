@@ -23,12 +23,12 @@ function Effect6({ img }: { img: string }) {
       onMouseEnter={() => setIsEnter(true)}
       onMouseLeave={() => setIsEnter(false)}
       className={`relative h-[430px] w-[550px] ml-auto overflow-hidden cursor-pointer
-      }`}
+       `}
     >
       {/* bottom */}
       <img
         ref={bottomElRef}
-        className="  border-2   block w-full h-full   object-cover absolute top-0 left-0   "
+        className="    block w-full h-full   object-cover absolute top-0 left-0   "
         src={img}
       />
 
@@ -36,7 +36,7 @@ function Effect6({ img }: { img: string }) {
 
       <img
         ref={topElRef}
-        className="   shadow shadow-black block w-full  h-full object-cover absolute top-0 left-0"
+        className="    shadow shadow-black block w-full  h-full object-cover absolute top-0 left-0"
         style={{ clipPath: 'circle(70.7% at 50% 50%)' }}
         src={img}
       />

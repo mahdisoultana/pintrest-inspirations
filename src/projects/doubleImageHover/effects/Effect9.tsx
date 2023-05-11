@@ -23,8 +23,8 @@ function Effect9({ img }: { img: string }) {
     <div
       onMouseEnter={() => setIsEnter(true)}
       onMouseLeave={() => setIsEnter(false)}
-      className={`relative h-[430px] w-[550px] ml-auto overflow-hidden cursor-pointer
-      }`}
+      className={`relative h-[430px] w-[550px] ml-auto overflow-hidden cursor-pointer hover:border-2
+      `}
     >
       {/* bottom */}
       <motion.img
