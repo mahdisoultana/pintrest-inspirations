@@ -2,14 +2,16 @@ function CopyRightFooter({
   className = ' text-yellow-700 font-semibold',
   imageSource = 'midjourney ',
   imageSourceLink = 'https://www.midjourney.com/',
+  codropLink = 'https://tympanus.net/codrops/category/tutorials/',
 }: {
+  codropLink?: string;
   className?: string;
   imageSourceLink: string;
   imageSource: string;
 }) {
   return (
     <div
-      className={`not-italic capitalize text-center text-[10px]  opacity-50 hover:opacity-100 ${className} cursor-default whitespace-nowrap `}
+      className={`not-italic capitalize text-center text-[8px]  opacity-50 hover:opacity-100 ${className} cursor-default  `}
     >
       <p>
         created by
@@ -44,10 +46,7 @@ function CopyRightFooter({
         </span>
         , thanks to
         <span className="underline hover:opacity-40 px-1" title="Codrops Link">
-          <a
-            href="https://tympanus.net/codrops/category/tutorials/"
-            target="_blank"
-          >
+          <a href={codropLink} target="_blank">
             codrops
           </a>
         </span>
