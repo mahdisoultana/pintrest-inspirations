@@ -1,5 +1,5 @@
 function CopyRightFooter({
-  className = ' text-yellow-700 font-semibold',
+  className = ' text-yellow-700 font-semibold text-[10px]',
   imageSource = 'midjourney ',
   imageSourceLink = 'https://www.midjourney.com/',
   codropLink = 'https://tympanus.net/codrops/category/tutorials/',
@@ -11,7 +11,7 @@ function CopyRightFooter({
 }) {
   return (
     <div
-      className={`not-italic capitalize text-center text-[8px]  opacity-50 hover:opacity-100 ${className} cursor-default  `}
+      className={`not-italic capitalize text-center   opacity-50 hover:opacity-100 ${className} cursor-default  `}
     >
       <p>
         created by

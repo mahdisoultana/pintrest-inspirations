@@ -27,7 +27,7 @@ function AnimateSVGShapesOnScroll() {
       <Sperial className="w-[100vw] bg-black flex items-center justify-center border" />
       <div className="bg-black w-[100vw]">
         <CopyRightFooter
-          className="py-20 text-orange-400 text-base font-Nunito bg-black w-[100vw]"
+          className="py-20 text-orange-400  text-sm font-Nunito bg-black w-[100vw]"
           imageSource="unsplash"
           imageSourceLink="https://unsplash.com/collections/9833981/china"
           codropLink="https://tympanus.net/Tutorials/OnScrollPathAnimations/"
