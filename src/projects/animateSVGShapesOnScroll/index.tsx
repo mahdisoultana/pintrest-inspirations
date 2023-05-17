@@ -14,13 +14,14 @@ function AnimateSVGShapesOnScroll() {
       <Sperial />
       <ImgShapWithText className="text-white" />
       <Chinise />
-      <section className="  bg-green-200 w-[100vw] relative">
-        <ImgShap src="/tea/3.jpg" />
+      <section className=" max-w-[1200px] w-full m-auto relative  ">
+        <ImgShap imgClipPath={true} src="/tea/6.jpg" />
         <ImgShap
+          imgClipPath={true}
           // src="/tea/.jpg"
-          className=" absolute top-1/2 -translate-y-1/2 left-0 w-[100vw] min-h-screen"
+          className=" absolute top-1/2 -translate-y-1/2 left-0 w-full "
         />
-        <ImgShap src="/tea/7.jpg" />
+        <ImgShap imgClipPath={true} src="/tea/1.jpg" />
       </section>
       <TwoColumnContentStart />
 
@@ -140,17 +141,99 @@ function Intro() {
     </article>
   );
 }
-function ImgShap({ className = ' relative ', src = '/tea/2.jpg' }) {
+function ImageClipPath({
+  height = '100vh',
+  className = '',
+  src = '/tea/1.jpg',
+}) {
   return (
-    <article
-      className={`z-10 bg-gray-900 w-full h-screen overflow-hidden  ${className}`}
+    <svg
+      className={`z-[200] pointer-events-none h-[${height}]  flex items-center justify-center ${className} `}
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      viewBox="0 0 1366 768"
+      xmlSpace="preserve"
+      preserveAspectRatio="none"
     >
+      <defs>
+        <clipPath id="shape1">
+          <path
+            data-to="M0,0c445.1,56.9,900.9,51,1366,0v768
+	c-446.5-53.9-901.5-56.1-1366,0V0z"
+            d="M0.5,229.5c423.9,233.8,881.9,228.8,1365,0l1,296
+	c-441.8,317.1-900.9,298.2-1366,5L0.5,229.5z"
+          />
+        </clipPath>
+      </defs>
+      <image
+        clip-path="url(#shape1)"
+        xlinkHref={src}
+        x="0"
+        y="0"
+        width="100%"
+        height="100%"
+      />
+    </svg>
+  );
+}
+function ImgShap({
+  className = ' relative ',
+  src = '/tea/2.jpg',
+  imgClipPath = false,
+  zIndex = '1',
+}) {
+  return imgClipPath ? (
+    <ImageClipPath className={className} src={src} />
+  ) : (
+    <article
+      style={{ zIndex }}
+      className={` bg-gray-900 w-full h-screen overflow-hidden    ${className}`}
+    >
+      {/* top */}
+      <SVGPath height="100vh" />
+      {/* bottom */}
+
       <img
-        className="block absolute top-0 left-0 object-cover w-full h-full"
+        className="block absolute top-0 left-0 object-cover w-full h-full z-10"
         src={src}
         alt="tea"
       />
+      <SVGPath
+        className="absolute bottom-0 left-0 w-full h-[400px]  "
+        curvePath="M -1 768 h 1366 c 0 0 -187 -184 -431 -187 C 499 574 587 716 -1 768 z"
+      />
     </article>
+  );
+}
+function SVGPath({
+  straightPath = straithPath,
+  curvePath = curvePath1,
+  height = '',
+  className = 'absolute top-0 left-0 w-full  ',
+}) {
+  return (
+    <svg
+      className={`z-[200] pointer-events-none ${
+        height || ' h-[60vh]'
+      } ${className} block`}
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      x="0px"
+      y="0px"
+      width="100%"
+      height="100%"
+      viewBox="0 0 1366 768"
+      xmlSpace="preserve"
+      preserveAspectRatio="none"
+    >
+      <path d={curvePath} className="fill-gray-100" />
+    </svg>
   );
 }
 function ImgShapWithText({
@@ -186,3 +269,6 @@ function Sperial({ className = 'bg-gray-900' }) {
   );
 }
 export default AnimateSVGShapesOnScroll;
+
+const straithPath = 'M0 768h1366H0z';
+const curvePath1 = 'M0 0h1366S792.5 137.5 474.5 137.5C201.5 137.5 0 0 0 0z';
