@@ -2,10 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  vertical-align: center;
+  object-fit: cover;
+}
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 @layer components {
   .line {
     @apply top-0 right-0 h-full w-[.4px];
   }
+}
+image {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 /*
 ::-webkit-scrollbar {
