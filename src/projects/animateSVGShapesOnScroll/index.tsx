@@ -150,41 +150,24 @@ function TwoColumnContentStart() {
   const classRight = ' top-0 right-[-167px] absolute';
   return (
     <div className="bg-black w-[100vw] mt-20">
-      <section className="m-auto max-w-[1000px] mt-10 grid lg:grid-cols-2  min-h-screen  text-right text-lg mb-10 items-center">
+      <section className="m-auto max-w-[1000px] mt-10 grid lg:grid-cols-2  min-h-screen py-[3vh]  text-right text-lg mb-10 items-center">
         <div className="w-full h-full relative">
           <SVGPath
             start="top 80%"
-            end="center 0%"
-            height="100vh"
+            end="bottom 0%"
             colorPath="black"
-            straightPath="M 0 0 h 1366 S 869 2 490 -2 C 203 6 0 0 0 0 z"
+            height="110%"
+            className={
+              'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] scale-y-[1.01]'
+            }
+            straightPath="M1366,768H0V0h1366V768z M659.5-75.5 M1247.5,478.5c25-178.9-224.4-354.6-408-420
+	c-247.9-88.3-607.8-57.8-680,119C85,360,324.2,680.2,617.5,748.5C883.7,810.5,1220.5,671,1247.5,478.5z
+	"
+            curvePath="M1366,768H0V0h1366V768z M659.5-75.5 M1184.5,424.5c6.6-177.9-208.1-332-396-367c-149.2-27.8-383.3,0.6-461,159
+	c-89.6,182.8,66.8,461.7,290,532C869.5,827.9,1176.8,632,1184.5,424.5z
+	"
           />
-          <SVGPath
-            start="top 80%"
-            end="center 0%"
-            colorPath="black"
-            className="absolute bottom-0 left-0 w-full h-[200px]  "
-            curvePath="M -1 768 h 1366 c 0 0 -187 -184 -431 -187 C 499 574 587 716 -1 768 z"
-            straightPath="M -1 768 h 1366 c 0 0 -203 -4 -469 -1 C 503 763 593 761 -1 768 z"
-          />
-          <SVGPath
-            start="top 80%"
-            end="center 0%"
-            colorPath="black"
-            height="100%"
-            className={classRight}
-            curvePath={PortraitcurvePathRight}
-            straightPath={PortraitcurvePathLeft}
-          />
-          <SVGPath
-            start="top 80%"
-            end="center 0%"
-            colorPath="black"
-            height="100%"
-            className={classLeft}
-            curvePath={PortraitcurvePathLeft}
-            straightPath={PortraitcurvePathRight}
-          />
+
           <img
             className="w-full h-full block object-cover absolute top-0 left-0"
             src="/tea/3.jpg"
@@ -239,8 +222,9 @@ function ImageClipPath({
   height = '100vh',
   className = '',
   src = '/tea/1.jpg',
+  animPath = 'M 0.5 246.5 c 528.5 153.5 827.5 144.5 1366 7 L 1366 598 C 826 722 539 734 0 598 L 0.5 246.5 z',
+  path = 'M 0.5 246.5 c 490.5 -147.5 844.5 -162.5 1366 7 L 1366 598 C 821 426 498 446 0 598 L 0.5 246.5 z',
 }) {
-  const animPath = `M 0.5 246.5 c 528.5 153.5 827.5 144.5 1366 7 L 1366 598 C 826 722 539 734 0 598 L 0.5 246.5 z`;
   const svgRef = useRef<any>(null);
   const pathRef = useRef<any>(null);
   useEffect(() => {
@@ -274,10 +258,7 @@ function ImageClipPath({
     >
       <defs>
         <clipPath id="shape1">
-          <path
-            ref={pathRef}
-            d="M 0.5 246.5 c 490.5 -147.5 844.5 -162.5 1366 7 L 1366 598 C 821 426 498 446 0 598 L 0.5 246.5 z"
-          />
+          <path ref={pathRef} d={path} />
         </clipPath>
       </defs>
       <image
